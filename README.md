@@ -1,4 +1,4 @@
-> `gbox-py` is a gbox that provides a number of gboxes from Python. It is part of the standard gbox set.
+> `gbox-glog` is a gbox that performas generalized log transform on a set of standard genes.
 
 
 
@@ -37,6 +37,11 @@ $ gx installGbox.sh granatumx/gbox-py:1.0.0  # Install this gbox
 
 ### Notes
 
-The gbox has a set of parameters passed into it on the frontend. These are defined in the `yamls/*.yaml` file.
-This tool uses mainly python functions for the granatum_sdk to set up the gbox.
+Glog transformation takes the form:
+
+**        $y = log((x + sqrt(x^2 + c))/2)$
+
+In our implementation, `c` is calculated based on a selected housekeeping gene and a selected background gene. These
+two genes are selected as the gene whose expression levels have the least standard deviation across all samples,
+amongst most `n` highly/lowly expressed genes.
 
