@@ -42,6 +42,9 @@ def main():
         raise ValueError()
 
     loghkdatabk = np.log(hk_gene - alphabk) / np.log(log_base)
+    
+    # Drop NAN values
+    loghkdatabk = loghkdatabk[~np.isnan(loghkdatabk)]
 
     c = (np.std(neg_gene[:], ddof=1) / np.std(loghkdatabk, ddof=1))**2
 
@@ -57,7 +60,7 @@ def main():
                 f"  * negative control gene: **{bottom_gene_row['gene_id']}**"
                 f"(mean: {bottom_gene_row['exp_mean']}, std: {bottom_gene_row['exp_std']})",
                 f"",
-                f"Final formula is `y = log{log_base}((z + sqrt(z^2 + c))/2)`, where `z = x - {alphabk}` and `c = {c}`.",
+                f"Final formula is `y = log{log_base}((z + sqrt(z^2 + c))/2)`, where `z = x - {alphabk}` and `c = {c}`."
             ]
         ), 'markdown'
     )
